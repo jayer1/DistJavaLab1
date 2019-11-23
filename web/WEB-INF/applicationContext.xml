@@ -51,14 +51,14 @@
     </bean>
 
     <!-- Beans for converting from Strings to entity objects -->
-<!--    <bean id="myConversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">-->
-<!--        <property name="converters">-->
-<!--            <list>-->
+    <bean id="myConversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
 <!--                <bean class="hibernate.service.converter.StringToDateConverter"/>-->
 <!--                <bean class="edu.wctc.inclasspm.service.converter.StringToDonutShopConverter"/>-->
-<!--            </list>-->
-<!--        </property>-->
-<!--    </bean>-->
+            </list>
+        </property>
+    </bean>
     <!-- Multipart upload resolver lets Spring intercept and read uploaded files -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10000000"/>
@@ -73,7 +73,7 @@
     <context:component-scan base-package="hibernate"/>
 
     <!-- Support for conversion, formatting, and validation -->
-<!--    <mvc:annotation-driven conversion-service="myConversionService"/>-->
+    <mvc:annotation-driven conversion-service="myConversionService"/>
 
     <!-- Configure Spring MVC view resolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

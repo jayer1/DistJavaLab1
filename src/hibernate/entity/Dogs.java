@@ -1,6 +1,9 @@
 package hibernate.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Dogs")
@@ -10,14 +13,19 @@ public class Dogs {
     @Column(name="Dog_Id")
     private int dog_id;
 
+    @NotNull(message = "required")
     @Column(name="Name")
     private String name;
 
+    @NotNull(message = "required")
+    @Min(value = 1, message = "must be greater than 0")
     @Column(name="Age")
-    private int age;
+    private Integer age;
 
+    @NotNull(message = "required")
+    @Min(value = 100, message = "must be greater than 100")
     @Column(name="Price")
-    private double price;
+    private Double price;
 
     @Column(name="Imagefile")
     private String imgFile;
@@ -68,19 +76,19 @@ public class Dogs {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -119,12 +127,18 @@ public class Dogs {
     public Dogs() {
     }
 
-    public Dogs(String name, int age, double price, String imgFile) {
+    public Dogs(String name, Integer age, Double price, String imgFile) {
         this.name = name;
         this.age = age;
         this.price = price;
         this.imgFile = imgFile;
 
+    }
+
+    public String getImagePath() {
+        if (imgFile == null)
+            return "none.jpg";
+        return "/" + imgFile;
     }
 
     @Override

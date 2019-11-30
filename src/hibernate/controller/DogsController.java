@@ -58,7 +58,7 @@ public class DogsController {
             // Put list of donut shops back in the new model
             theModel.addAttribute("genders", dogService.listAllGenders());
             theModel.addAttribute("breeds", dogService.listAllBreeds());
-            theModel.addAttribute("declawed", dogService.listAllDeclawed());
+            theModel.addAttribute("declaweds", dogService.listAllDeclawed());
 
             // Send back to form with error messages
             return "dog-form";
@@ -100,6 +100,19 @@ public class DogsController {
         theModel.addAttribute("declaweds", dogService.listAllDeclawed());
 
         return "dog-form";
+    }
+
+    @RequestMapping("/showDogDetail")
+    public String showDogDetail(@RequestParam("dogId") int theId, Model theModel) {
+
+        Dogs theDog = dogService.getDog(theId);
+        theModel.addAttribute("dog", theDog);
+
+        theModel.addAttribute("breeds", dogService.listAllBreeds());
+        theModel.addAttribute("genders", dogService.listAllGenders());
+        theModel.addAttribute("declaweds", dogService.listAllDeclawed());
+
+        return "dog-detail-form";
     }
 
     @InitBinder

@@ -1,10 +1,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <title>Add/Edit a Dog</title>
+    <title>Dog Detail</title>
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/css/style.css">
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/css/donut-form-style.css">
     <link type="text/css" rel="stylesheet" href="${contextPath}/resources/css/select-style.css">
@@ -13,7 +14,7 @@
 
 <div id="wrapper">
     <div id="header">
-        <h2>Add/Edit a Dog</h2>
+        <h2>Dog Detail</h2>
     </div>
 </div>
 
@@ -29,50 +30,35 @@
             <table>
                 <tr>
                     <td><label>Name</label></td>
-                    <td><form:input path="name"/>
-                        <form:errors path="name" cssClass="error"/></td>
+                    <td>${dog.name}</td>
+
                 </tr>
                 <tr>
                     <td><label>Age</label></td>
-                    <td><form:input path="age"/>
-                        <form:errors path="age" cssClass="error"/></td>
+                    <td>${dog.age}</td>
+
                 </tr>
                 <tr>
                     <td><label>Price</label></td>
-                    <td><form:input path="price"/>
-                        <form:errors path="price" cssClass="error"/></td>
+                    <td><fmt:setLocale value = "en_US"/>
+                        <fmt:formatNumber value = "${dog.price}" type = "currency"/></td>
+
                 </tr>
                 <tr>
                     <td><label>Breed</label></td>
-                    <td>
-                        <form:select path="breed" items="${breeds}" itemLabel="breed" itemValue="breedId"
-                                     cssClass="select-css">
-                        </form:select>
-                        <form:errors path="breed" cssClass="error"/>
-                    </td>
+                    <td>${dog.breed.breed}</td>
                 </tr>
                 <tr>
                     <td><label>Gender</label></td>
-                    <td>
-                        <form:select path="gender" items="${genders}" itemLabel="gender" itemValue="genderId"
-                                     cssClass="select-css">
-                        </form:select>
-                        <form:errors path="gender" cssClass="error"/>
-                    </td>
+                    <td>${dog.gender.gender}</td>
                 </tr>
                 <tr>
                     <td><label>Declawed?</label></td>
-                    <td>
-                        <form:select path="declawed" items="${declaweds}" itemLabel="declawed" itemValue="declawedId"
-                                     cssClass="select-css">
-                        </form:select>
-                        <form:errors path="declawed" cssClass="error"/>
-                    </td>
+                    <td>${dog.declawed.declawed}</td>
                 </tr>
                 <tr>
                     <td><label>Image</label></td>
                     <td>
-                        <input type="file" name="image">
                         <c:if test="${dog.imgFile != null}">
                             <br/><br/>
                             <img height="200" width="auto" src="${contextPath}/resources/img/${dog.imgFile}" alt="${dog.name}">
@@ -80,10 +66,7 @@
                         </c:if>
                     </td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Save" class="save"></td>
-                </tr>
+
             </table>
         </form:form>
 
@@ -97,3 +80,4 @@
 </div>
 </body>
 </html>
+

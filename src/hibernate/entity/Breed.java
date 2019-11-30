@@ -70,7 +70,7 @@ public class Breed {
         return "Breed{" +
                 "breedId=" + breedId +
                 ", breed='" + breed + '\'' +
-                ", doggie=" + doggie +
+    //            ", doggie=" + doggie +
                 '}';
     }
 }

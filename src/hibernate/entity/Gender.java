@@ -68,7 +68,7 @@ public class Gender {
         return "Gender{" +
                 "genderId=" + genderId +
                 ", gender='" + gender + '\'' +
-                ", doggie=" + doggie +
+     //           ", doggie=" + doggie +
                 '}';
     }
 }

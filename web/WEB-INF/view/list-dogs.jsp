@@ -37,7 +37,6 @@
         <th>Age</th>
         <th>Breed</th>
         <th>Gender</th>
-        <th>Age</th>
         <th>Price</th>
         <th>Declawed?</th>
         <th>Photo</th>
@@ -65,7 +64,6 @@
             <td>${tempDogs.age}</td>
             <td>${tempDogs.breed.breed}</td>
             <td>${tempDogs.gender.gender}</td>
-            <td>${tempDogs.age}</td>
             <td><fmt:setLocale value = "en_US"/>
                 <fmt:formatNumber value = "${tempDogs.price}" type = "currency"/></td>
             <td>${tempDogs.declawed.declawed}</td>

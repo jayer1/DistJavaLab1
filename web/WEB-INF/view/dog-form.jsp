@@ -17,6 +17,8 @@
     </div>
 </div>
 
+<%@include file="/WEB-INF/view/includes/header.jsp"%>
+
 <div id="container">
 
     <div id="content">

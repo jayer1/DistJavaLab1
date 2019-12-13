@@ -5,6 +5,7 @@ import hibernate.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +31,7 @@ public class DogsController {
         return "list-dogs";
     }
 
-    @RequestMapping("/showAddDogForm")
+    @RequestMapping("/user/showAddDogForm")
     public String showAddDonutForm(Model theModel) {
         Dogs theDog = new Dogs();
 
@@ -83,13 +84,13 @@ public class DogsController {
         return "list-dogs";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/admin/delete")
     public String deleteDog(@RequestParam("dogId") int theId) {
         dogService.deleteDog(theId);
         return "redirect:/dogs/list";
     }
 
-    @RequestMapping("/showUpdateDogForm")
+    @RequestMapping("/admin/showUpdateDogForm")
     public String showUpdateDogForm(@RequestParam("dogId") int theId, Model theModel) {
 
         Dogs theDog = dogService.getDog(theId);

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,17 +18,24 @@
         <h2>Dog Listings</h2>
     </div>
 </div>
+
+<%@include file="/WEB-INF/view/includes/header.jsp"%>
+
 <div id="container">
     <div id="content">
+<security:authorize access="hasRole('USER')">
         <button class="add-button"
-                onclick="window.location.href='showAddDogForm';return false;">Add Dog
+                onclick="window.location.href='${contextPath}/dogs/user/showAddDogForm';return false;">Add Dog
         </button>
+</security:authorize>
+
 
 
         <form:form action="search" method="GET">
             Search dogs <input type="search" name="searchTerm"/>
             <input type="submit" value="Search" class="add-button"/>
         </form:form>
+
 
 
         <table>
@@ -44,12 +52,13 @@
     </tr>
     <c:forEach var="tempDogs" items="${dogs}">
         <%--Update dog--%>
-        <c:url var="updateLink" value="/dogs/showUpdateDogForm">
+
+        <c:url var="updateLink" value="/dogs/admin/showUpdateDogForm">
             <c:param name="dogId" value="${tempDogs.dog_id}"/>
         </c:url>
 
         <!-- Delete dog  -->
-        <c:url var="deleteLink" value="/dogs/delete">
+        <c:url var="deleteLink" value="/dogs/admin/delete">
             <c:param name="dogId" value="${tempDogs.dog_id}"/>
         </c:url>
 
@@ -73,11 +82,14 @@
             <td>
                 <!-- display the update link -->
                 <a href="${detailLink}">Detail</a>
-
+                <security:authorize access="hasRole('ADMIN')">
                 <a href="${updateLink}">Update</a>
-
+                </security:authorize>
+                
+                <security:authorize access="hasRole('ADMIN')">
                 <a href="${deleteLink}"
                    onclick="if (!confirm('Are you sure?')) return false">Delete</a>
+                </security:authorize>
             </td>
 
         </tr>
